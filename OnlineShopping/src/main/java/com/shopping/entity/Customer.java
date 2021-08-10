@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -30,6 +32,10 @@ public class Customer {
 
 	@OneToMany(mappedBy = "customer")
 	private List<Address> addressList = new ArrayList<>();
+
+	@OneToOne
+	@JoinColumn(name = "userId")
+	private User user;
 
 	public int getCustomerId() {
 		return customerId;
@@ -77,6 +83,14 @@ public class Customer {
 
 	public void setAddressList(List<Address> addressList) {
 		this.addressList = addressList;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Customer() {
